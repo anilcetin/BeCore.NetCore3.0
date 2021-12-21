@@ -14,5 +14,6 @@ namespace DiscordApp.DataContext
         }
 
         public DbSet<Datas> Datas { get; set; }
+        public DbSet<Servers> Servers { get; set; }
     }
 }

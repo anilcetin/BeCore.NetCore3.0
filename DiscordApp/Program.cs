@@ -7,29 +7,30 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq.Expressions;
 
 namespace DiscordApp
 {
     public class Program
     {
-        static DiscordClient discord;
-        static string _hexId, _matchedDiscordId, _matchedReason, _matchStatement, _date;
         static async Task MainAsync()
         {
-            discord = new DiscordClient(new DiscordConfiguration
+
+            var discord = new DiscordClient(new DiscordConfiguration()
             {
                 Token = "OTE0NjkyNjMxNzI3MDY3MjQ2.YaQv5Q.5KGG4IY5rDNr4_STrq8tWh2dt-I",
                 TokenType = TokenType.Bot
             });
 
-            discord.MessageCreated += async e =>
+            discord.MessageCreated += async (s, e) =>
             {
-                
                 if (e.Message.Embeds.Count > 0)
                 {
+                    var serverName = e.Guild.Name.ToString();
+
                     var content = e.Message.Embeds[0].Description.ToString();
 
-                    InsertDiscordBanneds(content.ToString());
+                    InsertDiscordBanneds(content.ToString(), serverName);
                 }
             };
 
@@ -37,28 +38,40 @@ namespace DiscordApp
             await Task.Delay(-1);
         }
 
-        static void InsertDiscordBanneds(string hexId)
+        static void Main(string[] args)
         {
-                using (var conn = new ApplicationDbContext())
-                {
-                    Datas banneds = new Datas{
+            MainAsync().ConfigureAwait(false).GetAwaiter().GetResult();
+        }
 
-                        ServerId = hexId,
-                        ReasonDate = DateTime.Now.ToString("MM/dd/yyyy")
+        static void InsertDiscordBanneds(string hexId, string serverName)
+        {
+            using (var conn = new ApplicationDbContext())
+            {
+                if (!string.IsNullOrEmpty(serverName))
+                {
+                    if (!conn.Set<Servers>().Any(x => x.Name == serverName))
+                    {
+                        Servers servers = new Servers
+                        {
+                            Name = serverName,
+                            isActive = true
+                        };
+                        conn.Add(servers);
+                        conn.SaveChanges();
+                    }
+                    Datas banneds = new Datas
+                    {
+                        HexId = hexId,
+                        ServerId = serverName,
+                        ReasonDate = DateTime.Now.ToString("dd/MM/yyyy HH:mm")
                     };
-                    
                     conn.Add(banneds);
                     conn.SaveChanges();
                 }
-                return;
-            
+            }
+            return;
 
-        }
 
-        static void Main()
-        {
-            
-            MainAsync().ConfigureAwait(false).GetAwaiter().GetResult();
         }
     }
 }
