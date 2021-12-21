@@ -1,17 +1,13 @@
-﻿using DiscordApp.DataContext;
-using DiscordApp.Models;
-using DSharpPlus;
-using System;
+﻿using System;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using System.Collections.Generic;
-using System.Text;
-using System.Linq.Expressions;
+using DataContext;
+using DSharpPlus;
+using Models;
 
-namespace DiscordApp
+namespace Discord
 {
-    public class Program
+    class Program
     {
         static async Task MainAsync()
         {

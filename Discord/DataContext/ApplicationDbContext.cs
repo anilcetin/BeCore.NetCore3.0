@@ -1,10 +1,10 @@
-﻿using DiscordApp.Models;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace DiscordApp.DataContext
+namespace DataContext
 {
     public class ApplicationDbContext: DbContext
     {
