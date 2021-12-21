@@ -18,7 +18,7 @@ namespace WebAPI.Controllers
 
         [HttpGet("getbyid")]
         [Authorize(Roles = "admin")]
-        public IActionResult GetById(string serverId)
+        public IActionResult GetById(int serverId)
         {
             var result = _serverService.GetById(serverId);
             if (result.Success)

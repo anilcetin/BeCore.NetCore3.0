@@ -14,6 +14,6 @@ namespace Business.Abstract
         IResult Add(Data data);
         IResult Delete(Data data);
         IResult Update(Data data);
-        IDataResult<List<GetDataDto>> GetByHexId(string hexId);
+        IDataResult<List<Data>> GetByHexId(string hexId);
     }
 }

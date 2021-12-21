@@ -47,7 +47,7 @@ namespace Business.Concrete
             return new SuccessResult(Messages.ServerDeleted);
         }
 
-        public IDataResult<Server> GetById(string Id)
+        public IDataResult<Server> GetById(int Id)
         {
             return new SuccessDataResult<Server>(_serverDal.Get(p => p.Id == Id));
         }

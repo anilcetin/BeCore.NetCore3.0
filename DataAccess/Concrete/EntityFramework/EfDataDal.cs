@@ -18,7 +18,7 @@ namespace DataAccess.Concrete.EntityFramework
             {
                 var result = from d in context.Datas
                              join s in context.Servers
-                                on d.ServerId equals s.Id
+                                on d.ServerId equals s.Name
                              where d.HexId == hexId
                              select new GetDataDto
                              {

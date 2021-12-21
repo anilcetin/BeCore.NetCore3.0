@@ -38,7 +38,7 @@ namespace Business.Concrete
                     DiscordId = data.DiscordId,
                     ReasonId = data.ReasonId,
                     ServerId = data.ServerId,
-                    ReasonDate = DateTime.Today.ToString("ddMMyyyy")
+                    ReasonDate = DateTime.Today.ToString("dd.MM.yyyy")
                 };
             }
             _dataDal.Add(newData);
@@ -53,8 +53,20 @@ namespace Business.Concrete
 
         public IResult Update(Data data)
         {
-
-            _dataDal.Update(data);
+            Data newData = data;
+            if (data.ReasonDate == null)
+            {
+                newData = new Data
+                {
+                    Id = data.Id,
+                    HexId = data.HexId,
+                    DiscordId = data.DiscordId,
+                    ReasonId = data.ReasonId,
+                    ServerId = data.ServerId,
+                    ReasonDate = DateTime.Today.ToString("dd.MM.yyyy")
+                };
+            }
+            _dataDal.Update(newData);
             return new SuccessResult(Messages.DataUpdated);
         }
 
@@ -68,9 +80,9 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Data>>(_dataDal.GetList().ToList());
         }
 
-        public IDataResult<List<GetDataDto>> GetByHexId(string hexId)
+        public IDataResult<List<Data>> GetByHexId(string hexId)
         {
-            return new SuccessDataResult<List<GetDataDto>>(_dataDal.GetDataList(hexId), "Data listelendi");
+            return new SuccessDataResult<List<Data>>(_dataDal.GetList(p => p.HexId == hexId).ToList(), "Data listelendi");
         }
     }
 }

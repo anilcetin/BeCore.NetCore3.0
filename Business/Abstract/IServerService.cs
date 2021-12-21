@@ -8,7 +8,7 @@ namespace Business.Abstract
 {
     public interface IServerService
     {
-        IDataResult<Server> GetById(string serverId);
+        IDataResult<Server> GetById(int serverId);
         IDataResult<List<Server>> GetList();
         IResult Add(Server server);
         IResult Delete(Server server);
