@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Business.Abstract;
+using Core.Entities.Concrete;
 using Entities.Dtos;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
@@ -13,10 +15,12 @@ namespace WebAPI.Controllers
     public class AuthController:Controller
     {
         private IAuthService _authService;
+        private IUserService _userService;
 
-        public AuthController(IAuthService authService)
+        public AuthController(IAuthService authService, IUserService userService)
         {
             _authService = authService;
+            _userService = userService;
         }
 
         [HttpPost("login")]
@@ -54,6 +58,14 @@ namespace WebAPI.Controllers
             }
 
             return BadRequest(result.Message);
+        }
+
+        [Authorize(Roles = "admin")]
+        [HttpPut("profile")]
+        public ActionResult Profile(User user)
+        {
+            _userService.Update(user);
+            return Ok();
         }
     }
 }
