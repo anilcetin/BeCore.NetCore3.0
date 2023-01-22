@@ -23,30 +23,6 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<CertificateManager>().As<ICertificateService>();
             builder.RegisterType<EfCertificateDal>().As<ICertificateDal>();
 
-            builder.RegisterType<ContactManager>().As<IContactService>();
-            builder.RegisterType<EfContactDal>().As<IContactDal>();
-
-            builder.RegisterType<ContentManager>().As<IContentService>();
-            builder.RegisterType<EfContentDal>().As<IContentDal>();
-
-            builder.RegisterType<KnowledgeManager>().As<IKnowledgeService>();
-            builder.RegisterType<EfKnowledgeDal>().As<IKnowledgeDal>();
-
-            builder.RegisterType<EducationManager>().As<IEducationService>();
-            builder.RegisterType<EfEducationDal>().As<IEducationDal>();
-
-            builder.RegisterType<PortfolioManager>().As<IPortfolioService>();
-            builder.RegisterType<EfPortfolioDal>().As<IPortfolioDal>();
-
-            builder.RegisterType<SkillManager>().As<ISkillService>();
-            builder.RegisterType<EfSkillDal>().As<ISkillDal>();
-
-            builder.RegisterType<SocialManager>().As<ISocialService>();
-            builder.RegisterType<EfSocialDal>().As<ISocialDal>();
-
-            builder.RegisterType<TitleManager>().As<ITitleService>();
-            builder.RegisterType<EfTitleDal>().As<ITitleDal>();
-
             builder.RegisterType<AuthManager>().As<IAuthService>();
             builder.RegisterType<JwtHelper>().As<ITokenHelper>();
 
