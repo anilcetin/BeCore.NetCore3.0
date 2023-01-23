@@ -1,15 +1,16 @@
 ﻿using Core.Utilities.Results;
 using Entities.Concrete;
+using System;
 using System.Collections.Generic;
 
 namespace Business.Abstract
 {
-    public interface ICertificateService
+    public interface IProductService
     {
-        IDataResult<Certificate> GetById(int certificateId);
-        IDataResult<List<Certificate>> GetList();
-        IResult Add(Certificate certificate);
-        IResult Delete(Certificate certificate);
-        IResult Update(Certificate certificate);
+        IDataResult<Product> GetById(Guid product);
+        IDataResult<List<Product>> GetList();
+        IResult Add(Product product);
+        IResult Delete(Product product);
+        IResult Update(Product product);
     }
 }

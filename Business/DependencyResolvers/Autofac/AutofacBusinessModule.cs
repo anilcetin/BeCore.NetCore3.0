@@ -20,8 +20,15 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<UserManager>().As<IUserService>();
             builder.RegisterType<EfUserDal>().As<IUserDal>();
 
-            builder.RegisterType<CertificateManager>().As<ICertificateService>();
-            builder.RegisterType<EfCertificateDal>().As<ICertificateDal>();
+            builder.RegisterType<ProductManager>().As<IProductService>();
+            builder.RegisterType<EfProductDal>().As<IProductDal>();
+
+            // ----------------------------
+            builder.RegisterType<EfProductDetailDal>().As<IProductDetailDal>();
+
+            // ----------------------------
+            builder.RegisterType<EfCategoryDal>().As<ICategoryDal>();
+
 
             builder.RegisterType<AuthManager>().As<IAuthService>();
             builder.RegisterType<JwtHelper>().As<ITokenHelper>();

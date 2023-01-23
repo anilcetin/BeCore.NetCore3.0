@@ -3,44 +3,45 @@ using Business.Constants;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Business.Concrete
 {
-    public class CertificateManager : ICertificateService
+    public class ProductManager : IProductService
     {
-        private ICertificateDal _certificateDal;
-        public CertificateManager(ICertificateDal certificateDal)
+        private IProductDal _certificateDal;
+        public ProductManager(IProductDal certificateDal)
         {
             _certificateDal = certificateDal;
         }
 
-        public IResult Add(Certificate certificate)
+        public IResult Add(Product product)
         {
-            _certificateDal.Add(certificate);
+            _certificateDal.Add(product);
             return new SuccessResult(Messages.ServerAdded);
         }
 
-        public IResult Delete(Certificate certificate)
+        public IResult Delete(Product product)
         {
-            _certificateDal.Delete(certificate);
+            _certificateDal.Delete(product);
             return new SuccessResult(Messages.ServerDeleted);
         }
 
-        public IDataResult<Certificate> GetById(int certificateId)
+        public IDataResult<Product> GetById(Guid productId)
         {
-            return new SuccessDataResult<Certificate>(_certificateDal.Get(p => p.CertificateId == certificateId));
+            return new SuccessDataResult<Product>(_certificateDal.Get(p => p.ProductId == productId));
         }
 
-        public IDataResult<List<Certificate>> GetList()
+        public IDataResult<List<Product>> GetList()
         {
-            return new SuccessDataResult<List<Certificate>>(_certificateDal.GetList().ToList());
+            return new SuccessDataResult<List<Product>>(_certificateDal.GetList().ToList());
         }
 
-        public IResult Update(Certificate certificate)
+        public IResult Update(Product product)
         {
-            _certificateDal.Update(certificate);
+            _certificateDal.Update(product);
             return new SuccessResult(Messages.ServerUpdated);
         }
     }

@@ -11,11 +11,11 @@ using Remotion.Linq.Parsing.Structure.IntermediateModel;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class EfUserDal:EfEntityRepositoryBase<User,MyBlogContext>,IUserDal
+    public class EfUserDal:EfEntityRepositoryBase<User,MenuContext>,IUserDal
     {
         public List<OperationClaim> GetClaims(User user)
         {
-            using (var context = new MyBlogContext())
+            using (var context = new MenuContext())
             {
                 var result = from operationClaim in context.OperationClaims
                     join userOperationClaim in context.UserOperationClaims
